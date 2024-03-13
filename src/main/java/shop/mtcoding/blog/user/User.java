@@ -1,28 +1,31 @@
-package shop.mtcoding.blog.board;
+package shop.mtcoding.blog.user;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import shop.mtcoding.blog.user.User;
 
 import java.sql.Timestamp;
 
 @NoArgsConstructor
 @Data
-@Table(name = "board_tb")
+@Table(name = "user_tb")
 @Entity
-public class Board {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String title;
-    private String content;
-
-    //@JoinColumn(name = "user_id")
-    @ManyToOne
-    private User user; // db -> user_id
+    @Column(unique = true)
+    private String username;
+    private String password;
+    private String email;
 
     @CreationTimestamp // pc -> db (날짜주입)
     private Timestamp createdAt;
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 }
