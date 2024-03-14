@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +12,11 @@ import java.util.List;
 @Repository // new BoardRepository() -> IoC 컨테이너 등록
 public class BoardRepository {
     private final EntityManager em;
+
+    @Transactional
+    public void save(Board board){
+        em.persist(board);
+    }
 
     public List<Board> findAll() {
         Query query = em.createQuery("select b from Board b order by b.id desc", Board.class);
