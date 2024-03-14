@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @RequiredArgsConstructor
-@Repository
+@Repository // new BoardRepository() -> IoC 컨테이너 등록
 public class BoardRepository {
     private final EntityManager em;
 
