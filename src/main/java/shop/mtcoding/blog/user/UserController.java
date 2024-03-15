@@ -15,7 +15,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserRequest.LoginDTO reqDTO){
-        User sessionUser = userRepository.findByUsernameAndPassword(reqDTO);
+        User sessionUser = userRepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword());
 
         session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";

@@ -17,12 +17,11 @@ public class UserRepositoryTest {
     @Test
     public void findByUsername_test() {
         // given
-        UserRequest.LoginDTO reqDTO = new UserRequest.LoginDTO();
-        reqDTO.setUsername("ssar");
-        reqDTO.setPassword("1234");
+        String username = "ssar";
+        String password = "1234";
 
         // when
-        User user = userRepository.findByUsernameAndPassword(reqDTO);
+        User user = userRepository.findByUsernameAndPassword(username, password);
 
         // then
         Assertions.assertThat(user.getUsername()).isEqualTo("ssar");

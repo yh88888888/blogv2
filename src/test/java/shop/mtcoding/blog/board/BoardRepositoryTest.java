@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,8 +15,24 @@ public class BoardRepositoryTest {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Autowired
+    private EntityManager em;
+
     @Test
-    public void deleteById_test(){
+    public void updateById_test() {
+        // given
+        int id = 1;
+        String title = "title1";
+        String content = "content1";
+
+        // when
+        boardRepository.updateById(id, title, content);
+        em.flush(); // 실제 코드는 작성할 필요가 없다. 이유는? 트랜잭션 종료될꺼니까!!
+        // then
+    }
+
+    @Test
+    public void deleteById_test() {
         // given
         int id = 1;
 
@@ -23,7 +40,7 @@ public class BoardRepositoryTest {
         boardRepository.deleteById(id); // delete query 발동함
 
         // then
-        System.out.println("deleteById_test : "+boardRepository.findAll().size());
+        System.out.println("deleteById_test : " + boardRepository.findAll().size());
     }
 
     @Test
