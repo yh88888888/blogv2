@@ -19,13 +19,13 @@ public class BoardController {
     private final BoardRepository boardRepository;
     private final HttpSession session;
 
-@PostMapping("/board/save")
-public String save(BoardRequest.SaveDTO reqDTO) {
-    User sessionUser = (User) session.getAttribute("sessionUser");
-    boardRepository.save(reqDTO.toEntity(sessionUser));
+    @PostMapping("/board/save")
+    public String save(BoardRequest.SaveDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        boardRepository.save(reqDTO.toEntity(sessionUser));
 
-    return "redirect:/";
-}
+        return "redirect:/";
+    }
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable Integer id) {
@@ -39,6 +39,7 @@ public String save(BoardRequest.SaveDTO reqDTO) {
 
     @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable Integer id) {
+        boardRepository.deleteById(id);
         return "redirect:/";
     }
 
