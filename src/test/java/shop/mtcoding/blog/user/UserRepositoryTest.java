@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.user;
 
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,34 @@ public class UserRepositoryTest {
 
     @Autowired // DI
     private UserRepository userRepository;
+
+    @Autowired
+    private EntityManager em;
+
+    @Test
+    public void updateById_test() {
+        // given
+        int id = 1;
+        String password = "9999";
+        String email = "ssar@gmail.com";
+
+        // when
+        userRepository.updateById(id, password, email);
+        em.flush();
+
+        // then
+    }
+
+    @Test
+    public void findById_test() {
+        // given
+        int id = 1;
+
+        // when
+        userRepository.findById(id);
+
+        // then
+    }
 
     @Test
     public void findByUsername_test() {
