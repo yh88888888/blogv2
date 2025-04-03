@@ -1,26 +1,37 @@
-{{> /layout/header}}
+{{> layout/header}}
 
 <div class="container p-5">
 
     <!-- 수정삭제버튼 -->
     <div class="d-flex justify-content-end">
-        <a href="/board/{{board.id}}/update-form" class="btn btn-warning me-1">수정</a>
-        <form action="/board/{{board.id}}/delete" method="post">
+        <a href="/board/1/update-form" class="btn btn-warning me-1">수정</a>
+        <form action="/board/1/delete" method="post">
             <button class="btn btn-danger">삭제</button>
         </form>
     </div>
 
     <div class="d-flex justify-content-end">
-        <b>작성자</b> : {{board.user.username}}
+        <b>작성자</b> : ssar
     </div>
 
     <!-- 게시글내용 -->
     <div>
-        <h2><b>{{board.title}}</b></h2>
-        <hr />
+        <h2><b>제목1</b></h2>
+        <hr/>
         <div class="m-4 p-2">
-            {{board.content}}
+            내용1
         </div>
+    </div>
+
+    <!-- AJAX 좋아요 영역 -->
+    <div class="my-3 d-flex align-items-center">
+        <form>
+            <button id="likeBtn" type="button" onclick="toggleLike()" class="btn btn-outline-danger me-2"
+                    style="font-size: 1.5rem;">
+                🤍
+            </button>
+        </form>
+        <span><b id="likeCount">12</b>명이 이 글을 좋아합니다</span>
     </div>
 
     <!-- 댓글 -->
@@ -64,4 +75,31 @@
     </div>
 </div>
 
-{{> /layout/footer}}
+<script>
+    let liked = false;
+
+    function toggleLike() {
+
+        let likeBtn = document.querySelector('#likeBtn');
+        let likeCountSpan = document.querySelector('#likeCount');
+        let count = parseInt(likeCountSpan.innerText);
+
+        liked = !liked;
+
+        if (liked) {
+            likeBtn.innerText = '❤️';
+            likeBtn.classList.remove('btn-outline-danger');
+            likeBtn.classList.add('btn-danger');
+            likeBtn.style.fontSize = '2.2rem';
+            likeCountSpan.innerText = count + 1;
+        } else {
+            likeBtn.innerText = '🤍'; // 빈 하트
+            likeBtn.classList.remove('btn-danger');
+            likeBtn.classList.add('btn-outline-danger');
+            likeBtn.style.fontSize = '1.8rem'; // 원래 크기로
+            likeCountSpan.innerText = count - 1;
+        }
+    }
+</script>
+
+{{> layout/footer}}
