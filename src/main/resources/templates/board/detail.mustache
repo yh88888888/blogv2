@@ -1,80 +1,88 @@
 {{> layout/header}}
 <div class="container p-5">
 
-    <!-- 수정삭제버튼 -->
-    <div class="d-flex justify-content-end">
-        <a href="/board/1/update-form" class="btn btn-warning me-1">수정</a>
-        <form action="/board/1/delete" method="post">
-            <button class="btn btn-danger">삭제</button>
-        </form>
-    </div>
+	<!-- 수정삭제버튼 -->
+	<div class="d-flex justify-content-end">
+		<a href="/board/1/update-form" class="btn btn-warning me-1">수정</a>
+		<form action="/board/1/delete" method="post">
+			<button class="btn btn-danger">삭제</button>
+		</form>
+	</div>
 
-    <div class="d-flex justify-content-end">
-        <b>작성자</b> : ssar
-    </div>
+	<div class="d-flex justify-content-end">
+		<b>작성자</b> : ssar
+	</div>
 
-    <!-- 게시글내용 -->
-    <div>
-        <h2><b>제목1</b></h2>
-        <hr/>
-        <div class="m-4 p-2">
-            내용1
-        </div>
-    </div>
+	<!-- 게시글내용 -->
+	<div>
+		<h2><b>제목1</b></h2>
+		<hr/>
+		<div class="m-4 p-2">
+			내용1
+		</div>
+	</div>
 
-    <!-- AJAX 좋아요 영역 -->
-    <div class="my-3 d-flex align-items-center">
-        <span class="my-like-heart" onclick="likeToggle()">&#10084;</span>
-        <span><b id="likeCount">12</b>명이 이 글을 좋아합니다</span>
-    </div>
+	<!-- AJAX 좋아요 영역 -->
+	<div class="my-3 d-flex align-items-center">
+		<i id="likeIcon" class="fa fa-heart" style="font-size:20px; color:black" onclick="likeToggle()"></i>
+		<span class="ms-1"><b id="likeCount">12</b>명이 이 글을 좋아합니다</span>
+	</div>
 
-    <!-- 댓글 -->
-    <div class="card mt-3">
-        <!-- 댓글등록 -->
-        <div class="card-body">
-            <form action="/reply/save" method="post">
-                <textarea class="form-control" rows="2" name="comment"></textarea>
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
-                </div>
-            </form>
-        </div>
+	<!-- 댓글 -->
+	<div class="card mt-3">
+		<!-- 댓글등록 -->
+		<div class="card-body">
+			<form action="/reply/save" method="post">
+				<textarea class="form-control" rows="2" name="comment"></textarea>
+				<div class="d-flex justify-content-end">
+					<button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
+				</div>
+			</form>
+		</div>
 
-        <!-- 댓글목록 -->
-        <div class="card-footer">
-            <b>댓글리스트</b>
-        </div>
-        <div class="list-group">
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">cos</div>
-                    <div>댓글 내용입니다</div>
-                </div>
-                <form action="/reply/1/delete" method="post">
-                    <button class="btn">🗑</button>
-                </form>
-            </div>
-            <!-- 댓글아이템 -->
-            <div class="list-group-item d-flex justify-content-between align-items-center">
-                <div class="d-flex">
-                    <div class="px-1 me-1 bg-primary text-white rounded">ssar</div>
-                    <div>댓글 내용입니다</div>
-                </div>
-                <form action="/reply/1/delete" method="post">
-                    <button class="btn">🗑</button>
-                </form>
-            </div>
-        </div>
-    </div>
+		<!-- 댓글목록 -->
+		<div class="card-footer">
+			<b>댓글리스트</b>
+		</div>
+		<div class="list-group">
+			<!-- 댓글아이템 -->
+			<div class="list-group-item d-flex justify-content-between align-items-center">
+				<div class="d-flex">
+					<div class="px-1 me-1 bg-primary text-white rounded">cos</div>
+					<div>댓글 내용입니다</div>
+				</div>
+				<form action="/reply/1/delete" method="post">
+					<button class="btn">🗑</button>
+				</form>
+			</div>
+			<!-- 댓글아이템 -->
+			<div class="list-group-item d-flex justify-content-between align-items-center">
+				<div class="d-flex">
+					<div class="px-1 me-1 bg-primary text-white rounded">ssar</div>
+					<div>댓글 내용입니다</div>
+				</div>
+				<form action="/reply/1/delete" method="post">
+					<button class="btn">🗑</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
-    function likeToggle() {
-        let likeHeart = document.querySelector('.my-like-heart');
-        console.log(likeHeart);
-        likeHeart.classList.toggle('liked');
-    }
+	let liked = false; // 처음엔 좋아요 상태라고 가정
+
+	function likeToggle() {
+		let icon = document.querySelector('#likeIcon');
+
+		if (liked) {
+			icon.style.color = 'black';
+		} else {
+			icon.style.color = 'red';
+		}
+
+		liked = !liked;
+	}
 </script>
 
 {{> layout/footer}}
