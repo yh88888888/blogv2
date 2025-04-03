@@ -1,5 +1,4 @@
 {{> layout/header}}
-
 <div class="container p-5">
 
     <!-- 수정삭제버튼 -->
@@ -25,12 +24,7 @@
 
     <!-- AJAX 좋아요 영역 -->
     <div class="my-3 d-flex align-items-center">
-        <form>
-            <button id="likeBtn" type="button" onclick="toggleLike()" class="btn btn-outline-danger me-2"
-                    style="font-size: 1.5rem;">
-                🤍
-            </button>
-        </form>
+        <span class="my-like-heart" onclick="likeToggle()">&#10084;</span>
         <span><b id="likeCount">12</b>명이 이 글을 좋아합니다</span>
     </div>
 
@@ -76,29 +70,10 @@
 </div>
 
 <script>
-    let liked = false;
-
-    function toggleLike() {
-
-        let likeBtn = document.querySelector('#likeBtn');
-        let likeCountSpan = document.querySelector('#likeCount');
-        let count = parseInt(likeCountSpan.innerText);
-
-        liked = !liked;
-
-        if (liked) {
-            likeBtn.innerText = '❤️';
-            likeBtn.classList.remove('btn-outline-danger');
-            likeBtn.classList.add('btn-danger');
-            likeBtn.style.fontSize = '2.2rem';
-            likeCountSpan.innerText = count + 1;
-        } else {
-            likeBtn.innerText = '🤍'; // 빈 하트
-            likeBtn.classList.remove('btn-danger');
-            likeBtn.classList.add('btn-outline-danger');
-            likeBtn.style.fontSize = '1.8rem'; // 원래 크기로
-            likeCountSpan.innerText = count - 1;
-        }
+    function likeToggle() {
+        let likeHeart = document.querySelector('.my-like-heart');
+        console.log(likeHeart);
+        likeHeart.classList.toggle('liked');
     }
 </script>
 
