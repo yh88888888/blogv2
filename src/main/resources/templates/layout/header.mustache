@@ -31,7 +31,7 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
-
+{{#sessionUser}} //오브젝트이면 null인지 아닌지, 컬렉션이면 for, boolean이면 true,false
                 <li class="nav-item">
                     <a class="nav-link" href="/board/save-form">글쓰기</a>
                 </li>
@@ -41,13 +41,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">로그아웃</a>
                 </li>
-                <li class="nav-item">
+    {{/sessionUser}}
+    {{^sessionUser}}
+        <li class="nav-item">
                     <a class="nav-link" href="/join-form">회원가입</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/login-form">로그인</a>
                 </li>
-
+    {{/sessionUser}}
             </ul>
         </div>
     </div>
