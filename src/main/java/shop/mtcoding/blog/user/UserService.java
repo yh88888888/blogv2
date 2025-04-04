@@ -12,7 +12,15 @@ public class UserService {
     @Transactional
     public void 회원가입(UserRequest.JoinDTO joinDTO) {
 //        userRepository.save(joinDTO.getUsername(), joinDTO.getPassword(), joinDTO.getEmail());
-        userRepository.save(joinDTO.toEntity());
+        User user = joinDTO.toEntity(); //1. 비영속 객체
+        System.out.println("비영속 user: "+ user.getId());
+        userRepository.save(user);
+        System.out.println("영속/동기화 user: "+ user.getId());
+
+        System.out.println("-------------------");
+        userRepository.findById(4);
+        System.out.println("-------------------");
+        userRepository.findById(3);
 
     }
 

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 public class UserRepository {
     private final EntityManager em;
 
+    public User findById(int id) {
+//        return em.createQuery("select * from user_tb where=?", User.class).setParameter(1, id).getSingleResult();
+        return em.find(User.class, id);
+    }
 
     /*
     1. createNativeQuery → 기본쿼리
@@ -16,8 +20,10 @@ public class UserRepository {
     3. NamedQuery →  Query Metho는 함수 이름으로 쿼리 생성 - 하지마요!
     4. EntityGraph → 지금 이해못함
      */
-    public void save(User user) {
-        em.persist(user);
+    public void save(User user) { //비영속객체
+        em.persist(user);        //2. 영속객체
+        //3. user는 데이터베이스와 동기화 됨
+
     }
 
 //    public void save(String username, String password, String email) {
