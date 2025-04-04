@@ -12,6 +12,7 @@ public class UserRequest {
         private String password;
         private String email;
 
+
         public User toEntity() {
             return User.builder()
                     .username(username)
@@ -27,5 +28,6 @@ public class UserRequest {
     public static class LoginDTO {
         private String username;
         private String password;
+        private String rememberMe;
     }
 }
