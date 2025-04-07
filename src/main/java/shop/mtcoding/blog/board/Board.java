@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import shop.mtcoding.blog.user.User;
 
@@ -21,8 +22,8 @@ public class Board {
     private String content;
     private Boolean isPublic;
 
-    @ManyToOne(fetch = FetchType.EAGER) // 연관관계 설정
-    private User user;
+    @ManyToOne(fetch = FetchType.LAZY) // 연관관계 설정
+    private User user;  //ORM Relation Mapping
 
     @CreationTimestamp
     private Timestamp createdAt;

@@ -1,32 +1,33 @@
 package shop.mtcoding.blog.board;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
-@Import(BoardRepository.class)
-@DataJpaTest
+import java.util.List;
+
+@Import(BoardRepository.class) //BoardRepository
+@DataJpaTest //EntityManager, PC
 public class BoardRepositoryTest {
+
     @Autowired
     private BoardRepository boardRepository;
 
     @Test
-    public void findByIdV2_test() {
-        Board board = boardRepository.findByIdV2(1);
-        System.out.println(board.getId());
-        System.out.println(board.getTitle());
-        System.out.println("============");
-        System.out.println(board.getUser().getUsername());
+    public void findAll_test() {
+        //given
+        Integer userId = 1;
+        //when  테스트코드를 작성
+        List<Board> boardList = boardRepository.findAll(userId);
+//        System.out.println("--------------------");
+//        boardList.get(0).getUser().getUsername();
+//        System.out.println("--------------------");
+        //eye
+        for (Board board : boardList) {
+            System.out.print(board.getId()+"," + board.getTitle());
+            System.out.println();
+        }
     }
-
-    @Test
-    public void findByIdV1_test() {
-        Board board = boardRepository.findByIdV1(1);
-        System.out.println(board.getId());
-        System.out.println(board.getTitle());
-        System.out.println(board.getUser().getUsername());
-        System.out.println(board.getUser().getPassword());
-    }
-
 }
